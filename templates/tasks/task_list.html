@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Заявки</title>
+</head>
+<body>
+    <h1>Список заявок</h1>
+    <ul>
+        {% for task in tasks %}
+        <li>
+            <strong>{{ task.title }}</strong> - {{ task.status }} 
+            <a href="{% url 'accept_task' task.id %}">Принять в работу</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

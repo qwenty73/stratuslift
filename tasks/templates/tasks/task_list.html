@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список заявок</title>
+</head>
+<body>
+    <h1>Список заявок</h1>
+
+    <!-- Проверка, вошел ли пользователь в систему -->
+    {% if user.is_authenticated %}
+        <p>Вы вошли как {{ user.username }}.</p>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Выйти</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Войти</a> <!-- Кнопка логина -->
+    {% endif %}
+
+    <ul>
+        {% for task in tasks %}
+        <li>
+            <strong>{{ task.title }}</strong> - {{ task.status }} 
+            <a href="{% url 'accept_task' task.id %}">Принять в работу</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
